@@ -1,0 +1,17 @@
+{
+  "name": "merrypresents",
+  "version": "1.0.0",
+  "description": "A bot contesting in the first bot jam!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aktindo, cookie, dec00n",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "wokcommands": "^1.1.3"
+  }
+}
