@@ -10,13 +10,12 @@ module.exports = {
     cooldown: '5s',
     requiredPermissions: ['ADMINISTRATOR'],
     callback: async (message, args, client) => {
-        let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-        if (!user) return message.reply('Please provide a valid user!')
+        let user = message.mentions.members.first() || message.member
         if (isNaN(args[1])) return message.reply('That is not a number...')
         const result = await userCoinsSchema.findOneAndUpdate({
-            userId: user.id,
+            userId: user.user.id,
         }, {
-            userId: user.id,
+            userId: user.user.id,
             $inc: {
                 coins: args[1],
             }
@@ -25,6 +24,6 @@ module.exports = {
             new: true,
         })
         console.log(result.coins)
-        message.channel.send(`<@${user.id}> now has \`${result.coins}\` snowflakes ❄`)
+        message.channel.send(`**${user.user.tag}** now has \`${result.coins}\` snowflakes ❄`)
     }
 }

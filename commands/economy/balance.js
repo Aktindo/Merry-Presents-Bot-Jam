@@ -6,13 +6,13 @@ module.exports = {
     category: 'Economy',
     cooldown: '5s',
     callback: async (message, args, client) => {
-        let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
+        let user = message.mentions.members.first() || message.member
         const result = await userCoinsSchema.findOne({
-            userId: user.id,
+            userId: user.user.id,
         })
-        if (!result) return message.channel.send(`<@${user.id}> has \`0\` snowflakes ❄`)
+        if (!result) return message.channel.send(`${user.user.username} has \`0\` snowflakes ❄`)
         else {
-            message.channel.send(`<@${user.id}> has \`${result.coins}\` snowflakes ❄`)
+            message.channel.send(`${user.user.username} has \`${result.coins}\` snowflakes ❄`)
         }
     }
 }

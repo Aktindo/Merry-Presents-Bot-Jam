@@ -1,22 +1,22 @@
 const Discord = require('discord.js')
 const userCoinsSchema = require('../../models/user-coins-model')
 module.exports = {
-    description: 'Gives you your daily coins!',
+    description: 'Gives you your weekly coins!',
     category: 'Economy',
-    cooldown: '1d',
+    cooldown: '7d',
     callback: async (message, args, client) => {
         const result = await userCoinsSchema.findOneAndUpdate({
             userId: message.author.id,
         }, {
             userId: message.author.id,
             $inc: {
-                coins: 2500
+                coins: 25000
             }
         }, {
             upsert: true,
             new: true,
         })
         console.log(result.coins)
-        message.channel.send(`Here your daily \`2500\` snowflakes ❄`)
+        message.channel.send(`Here your weekly \`25000\` snowflakes ❄`)
     }
 }

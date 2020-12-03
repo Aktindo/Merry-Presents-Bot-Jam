@@ -9,6 +9,7 @@ client.on('ready', async () => {
   // Initialize WOKCommands
   new WOKCommands(client, 'commands', 'features')
   .setMongoPath(process.env.MONGOURL)
+  .setDisplayName('☃')
   .setDefaultPrefix('m!')
   .setCategoryEmoji('System', '💻')
   .setCategoryEmoji('Fun', '🎅')
