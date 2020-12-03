@@ -1,9 +1,10 @@
-const Data = require('../models/data');
+const Data = require('../../models/data');
 const discord = require('discord.js');
 
 module.exports = {
     description: 'a simple coinflip command, or is it?',
     aliases: ['cf', 'c-f'],
+    category: 'Fun',
     cooldown: '10s',
 
     callback: async (client, message, args) => {
