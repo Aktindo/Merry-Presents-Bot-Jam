@@ -4,6 +4,8 @@ require('dotenv').config()
  
 const client = new DiscordJS.Client()
 const mongo = require('./mongo')
+const queue = new Map()
+client.queue = queue
  
 client.on('ready', async () => {
   // Initialize WOKCommands

@@ -1,14 +1,14 @@
 const Discord = require('discord.js')
-const userCoinsSchema = require('../../models/user-coins-model')
+const userCoinsSchema = require('../../models/data')
 module.exports = {
     description: 'Gives you your yearly coins!',
     category: 'Economy',
     cooldown: '365d',
     callback: async (message, args, client) => {
         const result = await userCoinsSchema.findOneAndUpdate({
-            userId: message.author.id,
+            userID: message.author.id,
         }, {
-            userId: message.author.id,
+            userID: message.author.id,
             $inc: {
                 coins: 100000
             }

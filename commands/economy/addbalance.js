@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const userCoinsSchema = require('../../models/user-coins-model')
+const userCoinsSchema = require('../../models/data')
 module.exports = {
     description: 'Adds a bunch of snowflakes to a user\'s profile.',
     aliases: ['addbal'],
@@ -13,9 +13,9 @@ module.exports = {
         let user = message.mentions.members.first() || message.member
         if (isNaN(args[1])) return message.reply('That is not a number...')
         const result = await userCoinsSchema.findOneAndUpdate({
-            userId: user.user.id,
+            userID: user.user.id,
         }, {
-            userId: user.user.id,
+            userID: user.user.id,
             $inc: {
                 coins: args[1],
             }
