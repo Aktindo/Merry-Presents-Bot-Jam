@@ -1,22 +1,18 @@
-const { hangman } = require('reconlx')
-
 module.exports = {
-    description: 'Traditonal hangman game with christmas eve words',
+    description: 'Plays hangman with you!!!',
+    aliases: ['hang-m'],
     category: 'Fun',
-    cooldown: '30s',
-    callback: async (message, client) => {
-
-        const words = require('../../words.json');
-
-        const word = words[Math.floor(Math.random() * words.length)]
-
-        const hang = new hangman({
-            message: message,
-            word: word,
-            client: client,
-            channelID: message.channel
-        })
-
-        hang.start()
+    cooldown: '20s',
+    callback: async (message) => {
+      const HangmanGame = require('hangcord')
+      const words = require('../../words.json')
+      const hangman = new HangmanGame({
+        title: 'Hangman', // Title of the embed while displaying the game. Default: Hangman
+        color: 'RANDOM', // Color of the embed. Default: RANDOM
+        timestamp: true, // Will set timestamp for embeds. Default: true
+        gameOverTitle: 'Game Over', // Will set the embed title of the game over embed. Default: 'Game Over'
+        words: words// Custom set of words. Deafult: './words.json'
+      })
+      hangman.newGame(message)
     }
-}
+};

@@ -14,9 +14,9 @@ module.exports = {
         let income = Math.round(Math.random() * 50) + 300
 
         const result = await Data.findOneAndUpdate({
-            userID: user.user.id,
+            userID: message.author.id
         }, {
-            userID: user.user.id,
+            userID: message.author.id,
             $inc: {
                 coins: income,
             }

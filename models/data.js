@@ -4,6 +4,8 @@ const userSchema = mongoose.Schema({
     userID: String,
     username: String,
     coins: Number,
+    wins: Number,
+    losses: Number,
     badges: String,
     items: Array,
 })
