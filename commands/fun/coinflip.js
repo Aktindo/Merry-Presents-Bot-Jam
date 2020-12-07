@@ -8,7 +8,7 @@ module.exports = {
     maxArgs: 2,
     expectedArgs: '<choice> <price>',
     category: 'Fun',
-    cooldown: '10s',
+    cooldown: '60s',
 
     callback: async (message, args) => {
 

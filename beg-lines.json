@@ -1,0 +1,16 @@
+{
+    "success": [
+    "You begged Santa :santa: for some snowflakes and he gave you",
+    "You played with kids and begged them so they gave you",
+    "You begged Joe Biden and he gave you",
+    "A man took pity on you and gave"
+    ],
+
+    "fail": [
+        "I have nothing to give you :(",
+        "I have no money go away",
+        "Ho ho ho! Merry Christmas :tree:. Sadly the kids robbed me so I have no money.",
+        "Hahaha money go brrr"
+    ]
+
+}

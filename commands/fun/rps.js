@@ -5,7 +5,7 @@ module.exports = {
     description: 'Plays rock paper scissors with you!',
     aliases: ['rockpaperscissors'],
     category: 'Fun',
-    cooldown: '3s',
+    cooldown: '60s',
     callback: async (message, args) => {
         // to access data from anywhere
     
