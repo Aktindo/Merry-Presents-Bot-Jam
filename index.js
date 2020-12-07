@@ -18,7 +18,7 @@ client.on('ready', async () => {
   .setCategoryEmoji('System', '💻')
   .setCategoryEmoji('Fun', '🎅')
   .setCategoryEmoji('Economy', '❄')
-  .setCategoryEmoji('UNO', '🃏')
+  .setCategoryEmoji('Admin', '👨‍⚖️')
   .setColor('#5DADE2')
   .setSyntaxError("❄ Incorrect Usage! Please use `{PREFIX}{COMMAND} {ARGUMENTS}`.")
   await mongo()
