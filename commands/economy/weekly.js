@@ -1,14 +1,14 @@
 const Discord = require('discord.js')
-const Data = require('../../models/data')
+const userSchema = require('../../models/data')
 module.exports = {
     description: 'Gives you your weekly coins!',
     category: 'Economy',
     cooldown: '7d',
     callback: async (message, args, client) => {
-        const result = await Data.findOneAndUpdate({
-            userId: message.author.id,
+        const result = await userSchema.findOneAndUpdate({
+            userID: message.author.id,
         }, {
-            userId: message.author.id,
+            userID: message.author.id,
             $inc: {
                 coins: 25000
             }
