@@ -1,0 +1,27 @@
+[
+    {
+        "title": "In the song “Frosty the Snowman,” what made Frosty come to life?",
+        "options": ["An old silk hat", "A candy", "A fruit bar", "Presents"],
+        "correct": 1
+    },
+    {
+        "title": "What Christmas decoration was originally made from strands of silver?",
+        "options": ["Bells", "Christmas tree", "Snowflakes", "Tinsel"],
+        "correct": 4
+    },
+    {
+        "title": "Who played George Bailey in the Christmas classic “It’s a Wonderful Life?”",
+        "options": ["Jimmy Stewart", "Tony Stark", "Nobody", "Jared"],
+        "correct": 1
+    },
+    {
+        "title": "Per a recent holiday fad, what “spy” hides around the house, reporting back to Santa on who has been naughty and nice?",
+        "options": ["Little Elfs", "The Elf on the Bar", "The Elf on the Shelf", "Santa himself"],
+        "correct": 3
+    },
+    {
+        "title": "What Christmas beverage is also known as “milk punch?”",
+        "options": ["Beer", "Straw", "Eggnog", "Candy"],
+        "correct": 3
+    }
+]

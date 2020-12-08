@@ -21,6 +21,7 @@ client.on('ready', async () => {
   .setCategoryEmoji('Admin', '👨‍⚖️')
   .setColor('#5DADE2')
   .setSyntaxError("❄ Incorrect Usage! Please use `{PREFIX}{COMMAND} {ARGUMENTS}`.")
+  .setBotOwner('683879319558291539')
   await mongo()
   console.log('Clearing screen...')
   console.clear()
