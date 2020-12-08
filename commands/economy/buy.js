@@ -15,8 +15,8 @@ module.exports = {
 
         if (item == 'gift') {
 
-            await Data.findOne({
-                userId: message.author.id
+            Data.findOne({
+                userID: message.author.id
             }, async (err, res) => {
 
                 if (err) throw err
@@ -37,14 +37,11 @@ module.exports = {
 
                     message.channel.send('A wild :gift: has been added to your inventory! Would you like to open it?\nReply with `yes` or `no`')
 
-                    const filter = m => m.id == message.author.id
+                    const filter = m => m.author.id === message.author.id
 
                     message.channel.awaitMessages(filter, {
-
                         max: 1,
-                        time: 45000,
-                        errors: ["time"]
-
+                        time: 15000
                     })
                     .then( async collected => {
 
@@ -67,7 +64,7 @@ module.exports = {
 
                                     res.save()
 
-                                    msg.edit(`:tada: **You get ${income} snowflakes and a lucky :snowflake: Rare Snowflake`)
+                                    msg.edit(`:tada: **You get ${income} snowflakes and a lucky :snowflake: Rare Snowflake**`)
 
                                 }, 5000)
 
@@ -79,7 +76,7 @@ module.exports = {
 
                                     res.save()
 
-                                    msg.edit(`:tada: **You get ${income} snowflakes and... well nothing else :(`)
+                                    msg.edit(`:tada: **You get ${income} snowflakes and... well nothing else :(**`)
 
                                 }, 5000)
                                 
@@ -87,6 +84,8 @@ module.exports = {
 
                         }
 
+                    }).catch(err => {
+                        return message.channel.send("Ok, i'll keep it in your inventory then")
                     })
 
                 }
