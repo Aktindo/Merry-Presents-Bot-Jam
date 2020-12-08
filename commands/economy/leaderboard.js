@@ -1,12 +1,12 @@
 const Discord = require('discord.js')
-const userCoinsSchema = require('../../models/user-coins-model')
+const Data = require('../../models/data')
 module.exports = {
     description: 'Shows the server\'s most rich users.',
     aliases: ['lb'],
     category: 'Economy',
     cooldown: '5s',
     callback: async (message, args, client) => {
-        const results = await userCoinsSchema.find({}).limit(10).sort({
+        const results = await Data.find({}).limit(10).sort({
             coins: -1
         })
         if (!results) return message.channel.send('I am afraid to tell that nobody has a single snowflake yet :(')
