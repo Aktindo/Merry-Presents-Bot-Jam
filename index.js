@@ -1,6 +1,11 @@
 const DiscordJS = require('discord.js')
 const WOKCommands = require('wokcommands')
 require('dotenv').config()
+
+const { GiveawayCreator } = require('discord-giveaway');
+const Creator = new GiveawayCreator(client, process.env.MONGOURL);
+
+client.giveaways = Creator;
  
 const client = new DiscordJS.Client({
   partials: ['MESSAGE', 'REACTION'],
