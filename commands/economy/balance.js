@@ -6,7 +6,7 @@ module.exports = {
     category: 'Economy',
     cooldown: '5s',
     callback: async (message, args, client) => {
-        let user = message.mentions.members.first() || message.member
+        let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
         const result = await userSchema.findOne({
             userID: user.user.id,
         })

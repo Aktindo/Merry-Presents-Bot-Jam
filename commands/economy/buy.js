@@ -1,98 +1,65 @@
 const discord = require('discord.js');
 const Data = require('../../models/data');
-
+const fs = require('fs')
 module.exports = {
     description: 'Buy something from the shop',
     category: 'Economy',
     cooldown: '5s',
     callback: async (message, args, client) => {
-
+        const { confirmation } = require('reconlx')
         let item = args.slice(0).join('-')
 
         if (!item) return message.channel.send('Please include the item that you want to buy!')
 
-        // testing with the gift and the chances, will add more items support later
+        const items = require('../../shop-items.json')
+        let itemName = '';
+        let itemPrice = 0;
+        let itemDesc = '';
+        for (const i in items) {
+            if (item.toLowerCase() === items[i].key.toLowerCase()) { // If item is found, run this...
+                itemName = items[i].name
+                itemPrice = items[i].price;
+                itemDesc = items[i].description;
+            }
+        }
 
-        if (item == 'gift') {
+        if (itemName === '') {
+            return message.channel.send(`**Item ${item} not found.**`)
+        }
+        const res = await Data.findOne({
+            userID: message.author.id
+        }).catch(e=>console.error(e))
 
-            Data.findOne({
-                userID: message.author.id
-            }, async (err, res) => {
-
-                if (err) throw err
-
-                if (!res) return message.channel.send('You dont have any coins or items yet!')
-
-                if (res.coins < 5000) {
-
-                    return message.channel.send("I'm sorry but you don't have enough coins.")
-
-                }else {
-
-                    res.items.push('gift')
-
-                    res.coins = res.coins - 5000
-
-                    res.save()
-
-                    message.channel.send('A wild :gift: has been added to your inventory! Would you like to open it?\nReply with `yes` or `no`')
-
-                    const filter = m => m.author.id === message.author.id
-
-                    message.channel.awaitMessages(filter, {
-                        max: 1,
-                        time: 15000
-                    })
-                    .then( async collected => {
-
-                        if (collected.first().content.toLowerCase() === 'no') return message.channel.send(`Alright, keeping the gift in your inventory`)
-                        if (collected.first().content.toLowerCase() === 'yes') {
-
-                            const msg = await message.channel.send('Opening your gift...')
-
-                            const income = Math.floor(Math.random() * 100) + 1950
-
-                            let chance = Math.floor(Math.random() * 100) + 1
-
-                            if (chance >= 50) {
-
-                                setTimeout(function () {
-
-                                    res.coins = res.coins + income;
-
-                                    res.items = res.items.push(':snowflake:')
-
-                                    res.save()
-
-                                    msg.edit(`:tada: **You get ${income} snowflakes and a lucky :snowflake: Rare Snowflake**`)
-
-                                }, 5000)
-
-                            }else {
-
-                                setTimeout(function () {
-
-                                    res.coins = res.coins + income;
-
-                                    res.save()
-
-                                    msg.edit(`:tada: **You get ${income} snowflakes and... well nothing else :(**`)
-
-                                }, 5000)
-                                
-                            }
-
+        if (res.coins < itemPrice) {
+            message.channel.send(`You do not have enough snowflakes :snowflake: to buy that item.\nYou need more \`${itemPrice - res.coins}\` snowflakes :snowflake: to buy it!`)
+            return
+        }
+        else {
+            message.channel.send('Confirmation for Buying the item... Please react in 10 seconds.').then(async msg => {
+                const emoji = await confirmation(msg, message.author, ['✅', '❌'], 10000)
+                if(emoji === '✅') { //if author reacts on check
+                    await Data.findOneAndUpdate({
+                        userID: message.author.id,
+                    }, {
+                        userID: message.author.id,
+                        $push: {
+                            items: itemName
+                        },
+                        $inc: {
+                            coins: -itemPrice
                         }
-
-                    }).catch(err => {
-                        return message.channel.send("Ok, i'll keep it in your inventory then")
+                    }, {
+                        upsert: true,
+                        new: true
                     })
-
-                }
-
+                    message.channel.send(`You bought a **${itemName}** for \`${itemPrice}\` snowflakes :snowflake:`)
+                    msg.delete()
+                  } 
+                  if(emoji === '❌') { // if author reacts on cross
+                  // delete the confirmation message
+                    msg.delete()
+                  }
             })
-
-
         }
     }
 }

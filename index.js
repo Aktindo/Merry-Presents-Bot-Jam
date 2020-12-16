@@ -6,8 +6,8 @@ const client = new DiscordJS.Client({
   partials: ['MESSAGE', 'REACTION'],
 })
 const mongo = require('./mongo')
-const queue = new Map()
-client.queue = queue
+const config = require('./config.json')
+client.config = config
  
 client.on('ready', async () => {
   // Initialize WOKCommands
@@ -23,9 +23,9 @@ client.on('ready', async () => {
   .setSyntaxError("❄ Incorrect Usage! Please use `{PREFIX}{COMMAND} {ARGUMENTS}`.")
   .setBotOwner('683879319558291539')
   await mongo()
-  console.log('Clearing screen...')
-  console.clear()
   console.log('Ready!')
 })
+
+
  
 client.login(process.env.TOKEN)
