@@ -1,6 +1,6 @@
 module.exports = client => {
 const { GiveawayCreator } = require('discord-giveaway');
-const Creator = new GiveawayCreator(client, process.env.MONGO_URL);
+const Creator = new GiveawayCreator(client, process.env.MONGOURL);
  
 client.giveaways = Creator; // Access the Creator from anywhere.
 }
